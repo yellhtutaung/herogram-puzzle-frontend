@@ -1,28 +1,36 @@
-import React, { useEffect, useState } from 'react';
+// frontend/src/components/LeaderBoard.js
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const LeaderBoard = () => {
-    const [scores, setScores] = useState([]);
+const Leaderboard = () => {
+    const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
-        const fetchScores = async () => {
-            const response = await axios.get('http://localhost:5000/leaderboard');
-            setScores(response.data);
+        const fetchLeaderboard = async () => {
+            try {
+                const response = await axios.get('http://localhost:4400/leaderboard');
+                setLeaderboard(response.data);
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+                // Handle error: setLeaderboard([]) or show an error message
+            }
         };
 
-        fetchScores();
+        fetchLeaderboard();
     }, []);
 
     return (
         <div className="leaderboard">
             <h2>Leaderboard</h2>
-            <ul>
-                {scores.map((score, index) => (
-                    <li key={index}>{score.username}: {score.time} seconds</li>
+            <ol>
+                {leaderboard.map((score, index) => (
+                    <li key={index}>
+                        {score.username}: {score.time} seconds
+                    </li>
                 ))}
-            </ul>
+            </ol>
         </div>
     );
 };
 
-export default LeaderBoard;
+export default Leaderboard;

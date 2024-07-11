@@ -1,25 +1,47 @@
+/* src/App.css */
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
+
 .sudoku-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 5px;
+  margin-top: 20px;
+  border: 2px solid #ccc;
+  padding: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sudoku-row {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  display: flex;
+  justify-content: center;
 }
 
-input {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  font-size: 20px;
+.sudoku-cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .timer {
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .leaderboard {
   margin-top: 20px;
+}
+
+.leaderboard ol {
+  list-style: none;
+  padding: 0;
+}
+
+.leaderboard li {
+  margin-bottom: 5px;
 }

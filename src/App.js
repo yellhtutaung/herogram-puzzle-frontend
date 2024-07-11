@@ -10,18 +10,29 @@ function App() {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    const fetchPuzzle = async () => {
-      const response = await axios.get('http://localhost:4400/generate-puzzle');
-      setPuzzle(response.data.puzzle);
-    };
-
-    fetchPuzzle();
+      const fetchPuzzle = async () => {
+          try {
+              const response = await axios.get('http://localhost:4400/generate-puzzle');
+              setPuzzle(response.data.puzzle);
+          } catch (error) {
+              console.error('Error fetching puzzle:', error);
+              // Handle error: setPuzzle([]) or show an error message
+          }
+      };
+      fetchPuzzle();
   }, []);
 
   const handleCompletion = async (completionTime) => {
     const username = prompt('Enter your username:');
-    await axios.post('http://localhost:4400/submit-score', { username, time: completionTime });
-    setTime(completionTime);
+      if (username) {
+          try {
+              await axios.post('http://localhost:4400/submit-score', { username, time: completionTime });
+              setTime(completionTime);
+          } catch (error) {
+              console.error('Error submitting score:', error);
+              // Handle error: notify user or retry
+          }
+      }
   };
 
   return (
